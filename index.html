@@ -11,11 +11,16 @@
       href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:wght@400;500;600;700&family=Merriweather:wght@300;400;700&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://kit.fontawesome.com/98c4937106.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
     <header class="header">
-      <div class="logo">Movie App</div>
+      <div>
+        <img class="logo" src="./img/mgm-com-new-logo (1).png" alt="">
+      </div>
       <nav class="nav-bar">
         <ul class="nav-links">
           <li><a href="#" class="nav-link">Movies</a></li>
@@ -40,12 +45,79 @@
         />
       </form>
     </header>
-    <div class="container">
-        <div id="movie-details"></div>
-        <div>
-            <ul id="result" class="result-list"></ul>
+    <main class="container">
+
+        <section>
+        <div class="owl-carousel owl-theme">
+            <div class="item">
+                <img class="img-title" src="./img/Valhalla Title Treatment.png" alt="">
+                <img src="./img/Valhalla Main Slider Background DESKTOP.jpg" alt="" class="img">
+            </div>
+            <div class="item">
+                <img class="img-title" src="./img/YEAROFL - Title Treatment.png" alt="">
+                <img src="./img/YEAROFL - Main Slider Background DESKTOP.jpg" class="img">
+            </div>
+            <div class="item">
+                <img class="img-title" src="./img/PTAPROJE - Title Treatment v2.png" alt="">
+                <img src="./img/PTAPROJE - Main Slider Background DESKTOP v2.jpg" alt="" class="img">
+            </div>
+            <div class="item">
+                <img class="img-title" src="./img/OTCO3_title-treatment.png" alt="">
+                <img src="./img/OTCO3_Main Slider Background DESKTOP v2.jpg" alt="" class="img">
+            </div>
+            <div class="item">
+                <img class="img-title" src="./img/Beat Shazam S5 v2 - Title Treatment.png" alt="">
+                <img src="./img/Beat Shazam S5 - Main Slider Background DESKTOP.jpg" alt="" class="img">
+            </div>
         </div>
-    </div>
+    </section>
+
+    <section>
+      <div id="movie-details"></div>
+      <div>
+          <ul id="result" class="result-list"></ul>
+      </div>
+    </section>
+
+      <section>
+        <div id="popular-movie-inner">
+          <ul id="popular-movie-lists"></ul>
+        </div>
+      </section>
+
+      <section>
+        <div id="tv-show-inner">
+          <div class="tv-show-inner--head">
+          <ul id="tv-show-lists"></ul>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      <div class="footer-logo">
+        <img src="./img/mgm-com-new-footer-logo.png" alt="">
+      </div>
+        <ul class="footer-links">
+          <li><a href="#" class="footer-link">Terms of Use</a></li>
+          <li><a href="#" class="footer-link">Privacy Police</a></li>
+          <li><a href="#" class="footer-link">Advertise with us</a></li>
+          <li><a href="#" class="footer-link">Help</a></li>
+        </ul>
+        <ul class="footer-social-media">
+          <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+          <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+          <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+          <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
+          <li><a href="#"><i class="fa-brands fa-telegram"></i></a></li>
+        </ul>
+        <span class="footer-text">
+          Movie © Movie TV LLC. All other programs and/or marks are the property of their respective 
+          owners. All rights reserved.
+        </span>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="./script.js"></script>
   </body>
 </html>
