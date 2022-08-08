@@ -5,12 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Movie App</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:wght@400;500;600;700&family=Merriweather:wght@300;400;700&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ibarra+Real+Nova:wght@400;500;600;700&family=Merriweather:wght@300;400;700&family=Noto+Serif:wght@400;700&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://kit.fontawesome.com/98c4937106.js" crossorigin="anonymous"></script>
@@ -18,7 +15,7 @@
   </head>
   <body>
     <header class="header">
-      <div>
+      <div class="logo-inner">
         <img class="logo" src="./img/mgm-com-new-logo (1).png" alt="">
       </div>
       <nav class="nav-bar">
@@ -29,7 +26,7 @@
           <li><a href="#" class="nav-link">Coming Soon</a></li>
         </ul>
       </nav>
-      <form action="" id="form-search">
+      <form action="" id="form-search" class="form-search">
         <input
           type="text"
           class="keyword"
@@ -44,9 +41,18 @@
           id="btn-submit"
         />
       </form>
+     <div class="nav-bar-mobile">
+      <div class="search-mobile">
+        <i class="mobile-search-icon fa-solid fa-magnifying-glass"></i>
+      </div>
+      <div class="hamburger-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+     </div>
     </header>
     <main class="container">
-
         <section>
         <div class="owl-carousel owl-theme">
             <div class="item">
@@ -75,20 +81,20 @@
     <section>
       <div id="movie-details"></div>
       <div>
-          <ul id="result" class="result-list"></ul>
+          <ul id="result" class="movie-list"></ul>
       </div>
     </section>
 
       <section>
         <div id="popular-movie-inner">
-          <ul id="popular-movie-lists"></ul>
+          <ul id="popular-movie-lists" class="movie-list"></ul>
         </div>
       </section>
 
       <section>
         <div id="tv-show-inner">
           <div class="tv-show-inner--head">
-          <ul id="tv-show-lists"></ul>
+          <ul id="tv-show-lists" class="movie-list"></ul>
         </div>
       </section>
 
