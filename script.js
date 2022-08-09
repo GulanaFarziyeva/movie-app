@@ -8,6 +8,7 @@ const tv = document.querySelector("#tv-show-lists");
 const hamburgerMenu = document.querySelector(".hamburger-menu");
 const navLinks = document.querySelector(".nav-bar");
 const navbarSearchIcon = document.querySelector(".mobile-search-icon");
+const tvShowInner = document.querySelector("#tv-show-lists");
 
 const state = {};
 
@@ -28,7 +29,6 @@ class Search {
   }
 }
 
-
 class Movie {
   constructor(id) {
     this.id = id;
@@ -47,8 +47,7 @@ const backToTop = () => {
   window.scrollTo({ top: 675, behavior: "smooth" });
 };
 
-
-$(".owl-carousel").owlCarousel({
+$(".home-movie-slider").owlCarousel({
   loop: true,
   dots: false,
   autoplay: true,
@@ -62,7 +61,6 @@ $(".owl-carousel").owlCarousel({
     },
   },
 });
-
 
 const searchController = async () => {
   let textKeyword = document.querySelector("#txt-keyword").value;
@@ -78,17 +76,18 @@ const searchController = async () => {
 const displayResult = (data) => {
   data.results.forEach((movie) => {
     const html = `
-    <a href="#${movie.id}" class = "movie-link">
     <li class="movie-inner">
-      <div>
-        <img class="movie-poster" src="https://image.tmdb.org/t/p/w185/${movie.poster_path}">
+    <a href="#${movie.id}" class = "movie-link">
+      <div class="movie-poster-inner">
+        <img class="movie-poster" src="https://image.tmdb.org/t/p/w185/${movie.poster_path}"
+        onerror="this.src='https://nbcpalmsprings.com/wp-content/uploads/sites/8/2021/12/BEST-MOVIES-OF-2021.jpeg';">
       </div>
       <div class="movie-inner-body">
         <h5 class="movie-vote-average">${movie.vote_average}</h5>
-        <h2><a class="movie-title">${movie.title}</a></h2>
+        <h2><a href="#${movie.id}" class="movie-title">${movie.title}</a></h2>
       </div>
+      </a>
     </li>
-    </a>
     `;
     result.insertAdjacentHTML("beforeend", html);
   });
@@ -110,13 +109,13 @@ const displayMovie = (movie) => {
     genres += `<span class="genres">${genre.name}</span>`;
   });
 
-
-
   const html = `
     <li class="display-movie-inner">
-      <div><img class="display-movie-poster" src="https://image.tmdb.org/t/p/w300/${
+      <div>
+      <img class="display-movie-poster" src="https://image.tmdb.org/t/p/w300/${
         movie.poster_path
-      }"></div>
+      }" onerror="this.src='https://nbcpalmsprings.com/wp-content/uploads/sites/8/2021/12/BEST-MOVIES-OF-2021.jpeg';">
+      </div>
       <div class="display-movie-body">
         <h5 class="movie-vote-average display-movie"><i class="fa-solid fa-star"></i>${Math.round(
           movie.vote_average
@@ -142,23 +141,48 @@ const getPopularMovies = () => {
 
 const showPopularMovies = (data) => {
   data.forEach((movie) => {
-    let html = `<a  href="#${movie.id}" class = "movie-link">
+    let html = `
     <li class="movie-inner">
+    <a  href="#${movie.id}" class = "movie-link">
     <div class="movie-poster-inner">
-      <img class="movie-poster" src="https://image.tmdb.org/t/p/w185/${movie.poster_path}">
+      <img class="movie-poster" src="https://image.tmdb.org/t/p/w185/${movie.poster_path}"
+       onerror="this.src='https://nbcpalmsprings.com/wp-content/uploads/sites/8/2021/12/BEST-MOVIES-OF-2021.jpeg';">
     </div>
     <div class="movie-inner-body">
       <div><h5 class="movie-vote-average"><i class="fa-solid fa-star"></i>${movie.vote_average}</h5></div>
-      <div class="movie-title-inner"><a class="movie-title">${movie.title}</a></div>
+      <div class="movie-title-inner"><a href="#${movie.id}" class="movie-title">${movie.title}</a></div>
     </div>
-  </li>
-    </a>`;
+    </a>
+  </li>`;
     popularMovieLists.insertAdjacentHTML("beforeend", html);
   });
 };
 
 getPopularMovies();
 
+const getTvShow = () => {
+  fetch(`${BASE_KEY}${API_URL}/tv/top_rated?&api_key=${API_KEY}`)
+    .then((response) => response.json())
+    .then((data) => showTvShow(data.results))
+    .catch((err) => console.log(err));
+};
+
+const showTvShow = (data) => {
+  backToTop();
+
+  data.forEach((movie) => {
+    let html = `<li class="tv-show-inner">
+    <a  href="#${movie.id}" class = "movie-link">
+    <div><h5 class="movie-vote-average tv-show-vote"><i class="fa-solid fa-star"></i>${movie.vote_average}</h5></div>
+    <img class="tv-show-img" src="https://image.tmdb.org/t/p/w300/${movie.poster_path}" 
+    onerror="this.src='https://nbcpalmsprings.com/wp-content/uploads/sites/8/2021/12/BEST-MOVIES-OF-2021.jpeg';">
+    <div class="tv-title-inner"><a class="tv-title" href="#${movie.id}">${movie.title}</a></div>
+    </a>
+  </li>
+`;
+    tvShowInner.insertAdjacentHTML("beforeend", html);
+  });
+};
 
 hamburgerMenu.addEventListener("click", () => {
   hamburgerMenu.classList.toggle("active");
@@ -184,5 +208,3 @@ searchForm.addEventListener("submit", function (event) {
 });
 
 window.addEventListener("hashchange", movieController);
-
-
