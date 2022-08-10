@@ -9,11 +9,20 @@ const hamburgerMenu = document.querySelector(".hamburger-menu");
 const navLinks = document.querySelector(".nav-bar");
 const navbarSearchIcon = document.querySelector(".mobile-search-icon");
 const tvShowInner = document.querySelector("#tv-show-lists");
+const heroSection = document.querySelector('.hero-section');
+const popularMoviesLink = document.querySelector('#popular-movies');
+const tvShowSection = document.querySelector('#tv-show-section');
+const tvShow = document.querySelector('#tv-show');
+const links = document.querySelectorAll('.nav-link');
+const kidsMovies = document.querySelector('#kids-movies-lists');
+const kidsMoviesLink = document.querySelector('#kids-movies-link');
+const searchCloseBtn = document.querySelector('.search-close');
+
 
 const state = {};
 
 const API_KEY = "fa5adc2b06b93605ca3f37e83ffdde0d";
-const BASE_KEY = "https://api.themoviedb.org/3";
+const BASE_URL = "https://api.themoviedb.org/3";
 const API_URL = "/discover/movie?sort_by=popularity.desc";
 
 class Search {
@@ -23,7 +32,7 @@ class Search {
 
   async getResult() {
     const response = await fetch(
-      `${BASE_KEY}/search/movie?api_key=${API_KEY}&page=1&query=${this.keyword}`
+      `${BASE_URL}/search/movie?api_key=${API_KEY}&page=1&query=${this.keyword}`
     );
     this.data = await response.json();
   }
@@ -36,7 +45,7 @@ class Movie {
 
   async getMovie() {
     const response = await fetch(
-      `${BASE_KEY}/movie/${this.id}?api_key=${API_KEY}`
+      `${BASE_URL}/movie/${this.id}?api_key=${API_KEY}`
     );
     this.data = await response.json();
     console.log(this.data);
@@ -44,8 +53,9 @@ class Movie {
 }
 
 const backToTop = () => {
-  window.scrollTo({ top: 675, behavior: "smooth" });
+  window.scrollTo({ top: heroSection.scrollHeight - 40 , behavior: "smooth" });
 };
+
 
 $(".home-movie-slider").owlCarousel({
   loop: true,
@@ -74,22 +84,24 @@ const searchController = async () => {
 };
 
 const displayResult = (data) => {
+  result.innerHTML = '';
   data.results.forEach((movie) => {
     const html = `
     <li class="movie-inner">
-    <a href="#${movie.id}" class = "movie-link">
+    <a  href="#${movie.id}" class = "movie-link">
+    <h5 class="movie-vote-average"><i class="fa-solid fa-star"></i>${movie.vote_average}</h5>
       <div class="movie-poster-inner">
-        <img class="movie-poster" src="https://image.tmdb.org/t/p/w185/${movie.poster_path}"
-        onerror="this.src='https://nbcpalmsprings.com/wp-content/uploads/sites/8/2021/12/BEST-MOVIES-OF-2021.jpeg';">
+      <img class="movie-poster" src="https://image.tmdb.org/t/p/w300/${movie.poster_path}" 
+      onerror="this.src='https://nbcpalmsprings.com/wp-content/uploads/sites/8/2021/12/BEST-MOVIES-OF-2021.jpeg';">
       </div>
-      <div class="movie-inner-body">
-        <h5 class="movie-vote-average">${movie.vote_average}</h5>
-        <h2><a href="#${movie.id}" class="movie-title">${movie.title}</a></h2>
-      </div>
-      </a>
-    </li>
+    <div class="movie-inner-body">
+      <div class="movie-title-inner"><a href="#${movie.id}" class="movie-title">${movie.title}</a></div>
+    </div>
+    </a>
+  </li>
     `;
     result.insertAdjacentHTML("beforeend", html);
+    result.scrollIntoView({block:'start', behavior: 'smooth'})
   });
 };
 
@@ -100,7 +112,6 @@ const movieController = async () => {
     await state.movie.getMovie();
   }
   displayMovie(state.movie.data);
-  backToTop();
 };
 
 const displayMovie = (movie) => {
@@ -110,33 +121,32 @@ const displayMovie = (movie) => {
   });
 
   const html = `
-    <li class="display-movie-inner">
-      <div>
-      <img class="display-movie-poster" src="https://image.tmdb.org/t/p/w300/${
-        movie.poster_path
-      }" onerror="this.src='https://nbcpalmsprings.com/wp-content/uploads/sites/8/2021/12/BEST-MOVIES-OF-2021.jpeg';">
-      </div>
-      <div class="display-movie-body">
-        <h5 class="movie-vote-average display-movie"><i class="fa-solid fa-star"></i>${Math.round(
-          movie.vote_average
-        )}</h5>
-        <h2 class="display-movie"><a class="movie-title display-title" href="#${
-          movie.id
-        }">${movie.title}</a></h2>
-        <p class="movie-overview display-movie display-overview">${
-          movie.overview
-        }</p>
-        <p>${genres}</p>
-      </div>
-    </li>
+  <li class="display-movie-inner">
+    <div class="display-poster-inner">
+      <img class="display-movie-poster" src="https://image.tmdb.org/t/p/w300/${movie.poster_path}" 
+       onerror="this.src='https://nbcpalmsprings.com/wp-content/uploads/sites/8/2021/12/BEST-MOVIES-OF-2021.jpeg';">
+    </div>
+    <div class="display-movie-body">
+       <div class="movie-vote-average display-movie-vote"><i class="fa-solid fa-star"></i>${Math.round(
+        movie.vote_average )}
+       </div>
+       <div class="display-movie">
+         <a class="movie-title display-title" href="#${movie.id}">${movie.title}</a>
+       </div>
+       <p class="movie-overview display-movie display-overview">${movie.overview}</p>
+       <div class="movie-genres">${genres}<div>
+    </div>
+  </li>
     `;
+  backToTop()
   movieDetails.innerHTML = html;
 };
 
+
 const getPopularMovies = () => {
-  fetch(`${BASE_KEY}${API_URL}&api_key=${API_KEY}`)
+  fetch(`${BASE_URL}${API_URL}&api_key=${API_KEY}`)
     .then((response) => response.json())
-    .then((data) => showPopularMovies(data.results));
+    .then((data) =>  showPopularMovies(data.results));
 };
 
 const showPopularMovies = (data) => {
@@ -144,12 +154,12 @@ const showPopularMovies = (data) => {
     let html = `
     <li class="movie-inner">
     <a  href="#${movie.id}" class = "movie-link">
-    <div class="movie-poster-inner">
-      <img class="movie-poster" src="https://image.tmdb.org/t/p/w185/${movie.poster_path}"
-       onerror="this.src='https://nbcpalmsprings.com/wp-content/uploads/sites/8/2021/12/BEST-MOVIES-OF-2021.jpeg';">
-    </div>
+    <h5 class="movie-vote-average"><i class="fa-solid fa-star"></i>${movie.vote_average}</h5>
+      <div class="movie-poster-inner">
+      <img class="movie-poster" src="https://image.tmdb.org/t/p/w300/${movie.poster_path}" 
+      onerror="this.src='https://nbcpalmsprings.com/wp-content/uploads/sites/8/2021/12/BEST-MOVIES-OF-2021.jpeg';">
+      </div>
     <div class="movie-inner-body">
-      <div><h5 class="movie-vote-average"><i class="fa-solid fa-star"></i>${movie.vote_average}</h5></div>
       <div class="movie-title-inner"><a href="#${movie.id}" class="movie-title">${movie.title}</a></div>
     </div>
     </a>
@@ -161,20 +171,18 @@ const showPopularMovies = (data) => {
 getPopularMovies();
 
 const getTvShow = () => {
-  fetch(`${BASE_KEY}${API_URL}/tv/top_rated?&api_key=${API_KEY}`)
+  fetch(`${BASE_URL}${API_URL}/tv/top_rated?&api_key=${API_KEY}`)
     .then((response) => response.json())
     .then((data) => showTvShow(data.results))
-    .catch((err) => console.log(err));
 };
 
 const showTvShow = (data) => {
-  backToTop();
 
   data.forEach((movie) => {
-    let html = `<li class="tv-show-inner">
+    let html = `<li class="slider-inner">
     <a  href="#${movie.id}" class = "movie-link">
-    <div><h5 class="movie-vote-average tv-show-vote"><i class="fa-solid fa-star"></i>${movie.vote_average}</h5></div>
-    <img class="tv-show-img" src="https://image.tmdb.org/t/p/w300/${movie.poster_path}" 
+    <div><h5 class="movie-vote-average slider-vote"><i class="fa-solid fa-star"></i>${movie.vote_average}</h5></div>
+    <img class="slider-img" src="https://image.tmdb.org/t/p/w300/${movie.poster_path}" 
     onerror="this.src='https://nbcpalmsprings.com/wp-content/uploads/sites/8/2021/12/BEST-MOVIES-OF-2021.jpeg';">
     <div class="tv-title-inner"><a class="tv-title" href="#${movie.id}">${movie.title}</a></div>
     </a>
@@ -184,10 +192,37 @@ const showTvShow = (data) => {
   });
 };
 
+
+const getKidsMovies = () => {
+  fetch(`${BASE_URL}/discover/movie?certification_country=US&certification.lte=G&sort_by=popularity.desc&api_key=${API_KEY}`)
+    .then((response) => response.json())
+    .then((data) => showKidsMovies(data.results));
+};
+
+const showKidsMovies = (data) => {
+
+  data.forEach((movie) => {
+    let html = `
+    <li class="slider-inner">
+    <a  href="#${movie.id}" class = "movie-link">
+    <div><h5 class="movie-vote-average slider-vote"><i class="fa-solid fa-star"></i>${movie.vote_average}</h5></div>
+    <img class="slider-img" src="https://image.tmdb.org/t/p/w300/${movie.poster_path}" 
+    onerror="this.src='https://nbcpalmsprings.com/wp-content/uploads/sites/8/2021/12/BEST-MOVIES-OF-2021.jpeg';">
+    <div class="tv-title-inner"><a class="tv-title" href="#${movie.id}">${movie.title}</a></div>
+    </a>
+  </li>`;
+
+    kidsMovies.insertAdjacentHTML("beforeend", html);
+  });
+};
+
+
+
 hamburgerMenu.addEventListener("click", () => {
   hamburgerMenu.classList.toggle("active");
   navLinks.classList.toggle("active");
 });
+
 
 navbarSearchIcon.addEventListener("click", () => {
   if (searchForm.style.left == "-100%") {
@@ -196,6 +231,24 @@ navbarSearchIcon.addEventListener("click", () => {
     searchForm.style.left = "-100%";
   }
 });
+
+links.forEach (link =>{
+  link.addEventListener('click', () =>{
+    [...links].map(link => link.classList.remove('link-active'));
+    link.classList.add('link-active');
+    let href = link.getAttribute('href').replace('#', '');
+    document.getElementById('href').scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+      inline: 'center'
+    })
+  })
+})
+
+searchCloseBtn.addEventListener('click', () =>{
+  searchForm.classList.add('form-remove');
+})
+
 
 window.addEventListener("scroll", function () {
   let windowPosition = this.window.scrollY > 0;
@@ -208,3 +261,12 @@ searchForm.addEventListener("submit", function (event) {
 });
 
 window.addEventListener("hashchange", movieController);
+
+tvShow.addEventListener('click', getTvShow);
+
+kidsMoviesLink.addEventListener('click', getKidsMovies);
+
+
+
+
+

@@ -32,18 +32,19 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
+
     <header class="header">
       <div class="logo-inner">
         <img class="logo" src="./img/mgm-com-new-logo (1).png" alt="" />
       </div>
       <nav class="nav-bar">
         <ul class="nav-links">
-          <li><a href="#" class="nav-link">Movies</a></li>
+          <li><a href="#movies-section" class="nav-link">Movies</a></li>
           <li>
-            <a href="#" class="nav-link" onclick="getTvShow()">TV Show</a>
+            <a href="#tv-show-section" class="nav-link" id="tv-show">TV Show</a>
           </li>
-          <li><a href="#" class="nav-link" id="popular-movies">Popular</a></li>
-          <li><a href="#" class="nav-link">Coming Soon</a></li>
+          <li><a href="#popular-movies-section" class="nav-link" id="popular-movies">Popular</a></li>
+          <li><a href="#kids-section" class="nav-link" id="kids-movies-link">Kids</a></li>
         </ul>
       </nav>
       <form action="" id="form-search" class="form-search">
@@ -60,6 +61,7 @@
           value="Submit"
           id="btn-submit"
         />
+        <img src="./img/close.svg" alt="" class="search-close">
       </form>
       <div class="nav-bar-mobile">
         <div class="search-mobile">
@@ -72,8 +74,10 @@
         </div>
       </div>
     </header>
-    <main class="container">
-      <section>
+
+    <main>
+
+      <section class="hero-section">
         <div class="home-movie-slider owl-carousel owl-theme">
           <div class="home-movie-silder--item">
             <img
@@ -137,57 +141,71 @@
         </div>
       </section>
 
-      <section>
-        <div id="movie-details"></div>
+      <section class="movie-details-section max-content" >
+        <div id="movie-details" class="movie-details-inner">
+        </div>
         <div>
-          <ul id="result" class="movie-list"></ul>
+          <ul id="result" class="movie-list scroll-margin-top">
+          </ul>
         </div>
       </section>
 
-      <section>
+      <section id="tv-show-section" class="scroll-margin-top max-content">
         <div id="tv-show-inner">
-          <ul id="tv-show-lists" class="tv-show-slider scroll"></ul>
+          <ul id="tv-show-lists" class="slider-container scroll"></ul>
         </div>
       </section>
 
-      <section>
-        <div id="popular-movie-inner">
+      <section id="popular-movies-section" class="scroll-margin-top max-content">
+        <div class="popular-movie-inner">
+        </div>
+        <div>
           <ul id="popular-movie-lists" class="movie-list"></ul>
+        </div>
+      </section>
+
+      <section id="movies-section"></section>
+
+      <section id="kids-section"><div>
+        <div >
+          <ul id="kids-movies-lists" class="slider-container scroll scroll-margin-top max-content"></ul>
         </div>
       </section>
     </main>
 
-    <footer class="footer">
-      <div class="footer-logo">
-        <img src="./img/mgm-com-new-footer-logo.png" alt="" />
+    <footer class="footer-inner">
+      <div class="footer max-content">
+        <div class="footer-logo">
+          <img src="./img/mgm-com-new-footer-logo.png" alt="" />
+        </div>
+        <ul class="footer-links">
+          <li><a href="#" class="footer-link">Terms of Use</a></li>
+          <li><a href="#" class="footer-link">Privacy Police</a></li>
+          <li><a href="#" class="footer-link">Advertise with us</a></li>
+          <li><a href="#" class="footer-link">Help</a></li>
+        </ul>
+        <ul class="footer-social-media">
+          <li>
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+          </li>
+          <li>
+            <a href="#"><i class="fa-brands fa-telegram"></i></a>
+          </li>
+        </ul>
+        <span class="footer-text">
+          Movie © Movie TV LLC. All other programs and/or marks are the property
+          of their respective owners. All rights reserved.
+        </span>
       </div>
-      <ul class="footer-links">
-        <li><a href="#" class="footer-link">Terms of Use</a></li>
-        <li><a href="#" class="footer-link">Privacy Police</a></li>
-        <li><a href="#" class="footer-link">Advertise with us</a></li>
-        <li><a href="#" class="footer-link">Help</a></li>
-      </ul>
-      <ul class="footer-social-media">
-        <li>
-          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
-        </li>
-        <li>
-          <a href="#"><i class="fa-brands fa-instagram"></i></a>
-        </li>
-        <li>
-          <a href="#"><i class="fa-brands fa-twitter"></i></a>
-        </li>
-        <li>
-          <a href="#"><i class="fa-brands fa-youtube"></i></a>
-        </li>
-        <li>
-          <a href="#"><i class="fa-brands fa-telegram"></i></a>
-        </li>
-      </ul>
-      <span class="footer-text">
-        Movie © Movie TV LLC. All other programs and/or marks are the property
-        of their respective owners. All rights reserved.
-      </span>
     </footer>
 
     <script
